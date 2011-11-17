@@ -35,12 +35,12 @@ cfg_t::cfg_t() :
 {
 }
 
-//! Проверить на корректность имя типа.
+//! Check name of type.
 void
 check_type( 
-	//! На проверку.
+	//! Check this value.
 	const std::string & value, 
-	//! Описание для ошибки.
+	//! Description of error.
 	const std::string & desc )
 {
 	if ( value.empty() )
@@ -114,7 +114,7 @@ cfg_t::check()
 	for( unsigned int i = 0; i < m_types.size(); ++i )
 		check_type( m_types[i], m_types[i] );
 
-	// Проверяем на одинаковые элементы.
+	// Check to the same elements.
 	for( unsigned int i = 0; i < m_types.size()-1; ++i )
 	{
 		if ( m_types[i] == m_types[i+1] )

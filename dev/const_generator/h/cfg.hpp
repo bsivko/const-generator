@@ -29,35 +29,38 @@
 
 namespace const_generator {
 
-//! Конфигурация сборки.
+//! Configuration of gereration.
 struct cfg_t
 {
-	//! Имя основного класса.
+	//! Name of root class.
 	std::string m_root_class_name;
 
 	typedef std::vector<std::string> types_t;
-	//! Набор констант для генерации.
+	//! Constants for generation.
 	types_t m_types;
 
 	typedef std::vector<std::string> namespaces_t;
-	//! Вложенность пространств имен.
+	//! Namespace of user.
 	namespaces_t m_namespaces;
 
-	//! Включать в имя типа корневое имя или нет.
+	//! Include in name root type or not. 
+	/*!
+		true - include
+	*/
 	bool m_include_root_in_type;
 
-	//! Проверить структуру на корректность.
+	//! Check this structure - correct or not.
 	/*!
-		\throw std::exception в случае ошибок.
+		\throw std::exception if is not checks.
 
-		\note автоматически выполняет normalize()
+		\note automatic do normalize()
 	*/
 	void
 	check();
 
-	//! Привести данные в соответствии с внутреними требованиями.
+	//! Normalize data to internal requirements.
 	/*!
-		\note запуск должен производится после формирования всех данных.
+		\note call must be after forming all cfg data.
 	*/
 	void
 	normalize();

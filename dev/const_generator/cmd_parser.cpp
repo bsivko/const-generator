@@ -31,11 +31,11 @@
 
 namespace const_generator {
 
-//! –аздел€ет входную строку на составл€щие по разделителю.
+//! Split incoming string to parts by delimiter.
 /*!
-	\return вектор значений в пор€дке разбора строки.
+	\return vector of values in order of parsing.
 
-	\note разделители удал€ютс€.
+	\note delimiters should be deleted.
 */
 std::vector<std::string>
 split_by_delimiter( 
@@ -44,7 +44,7 @@ split_by_delimiter(
 {
 	std::vector<std::string> result;
 
-	// »щем все разделители.
+	// Find all delimiters.
 	size_t pos = 0;
 	std::vector<size_t> poses;
 	while( value.size() > pos )
@@ -58,7 +58,7 @@ split_by_delimiter(
 		pos = to_find + delimiter.size();
 	}
 
-	// –азбиваем по разделител€м.
+	// Split by delimiters.
 	size_t start = 0;
 	for( unsigned int i = 0; i < poses.size(); ++i )
 	{
@@ -77,7 +77,7 @@ tclap_parse( int argc, char ** argv )
 
 	try
 	{
-		TCLAP::CmdLine cmd( "Generator of class constants.", 
+		TCLAP::CmdLine cmd( "Constant Generator.", 
 			' ', "1.0.0", true );
 
 		TCLAP::ValueArg<std::string> namespace_arg(
