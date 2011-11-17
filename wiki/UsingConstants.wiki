@@ -94,3 +94,9 @@ class current_date_time_t : public date_time_t
 }}}
 
 We use root class `date_time_t` to config user time control of transactions. At some moment we wanted to extend by function. To do this we created virtual function in the root class. Compiler controlled creating of functions in all constants. And we can use this function in all constants and in class `date_time_modes_t`.
+
+= Extending new constants =
+
+We should do two actions:
+ # Create new sub-class of root-class. And create all virtual methods.
+ # Add in function `init()` inserting to container by sample.
