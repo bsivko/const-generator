@@ -27,7 +27,7 @@
 
 namespace const_generator {
 
-//! Разбирает переданные параметры с помощью tclap.
+//! Parse and process params by tclap.
 cfg_t
 tclap_parse( int argc, char ** argv );
 
