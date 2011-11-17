@@ -1,0 +1,33 @@
+#summary Description of generating constants.
+
+= Using =
+
+Use command-line to create base constants files.
+
+Generator create only base files by user params. Next extending should be do by hand.
+
+To view help of command line type:
+
+{{{
+>const_generator --help
+}}}
+
+= Example =
+
+Lets see run of next command:
+
+{{{
+>const_generator -n generator::main -r date_time current const all_current
+}}}
+
+As a result, "Const Generator" should create two files:
+
+"date_time.hpp"
+"date_time.cpp"
+
+Internal code should be placed in namespace `generator::main`.
+
+Base type of class is `date_time_t`, and we'll find three child-classes: 
+`current_date_time_t`, `const_date_time_t`, `all_current_date_time_t`.
+
+In addition we'll find class `date_time_modes_t`. This class controls all types of constants.
