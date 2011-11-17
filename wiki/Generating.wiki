@@ -4,6 +4,8 @@
 
 Use command-line to create base constants files.
 
+To use without compilation you can get binary files in [http://code.google.com/p/const-generator/source/browse/#svn%2Ftags%2Fbin tag-bin] directory.
+
 Generator create only base files by user params. Next extending should be do by hand.
 
 To view help of command line type:
