@@ -1,0 +1,96 @@
+#summary Examples of using constants.
+
+= Element of Type =
+
+All constant elements are const pointers.
+
+Elements can be created by several ways:
+
+{{{
+const date_time_t * const_time_1 = date_time_modes_t::factory( "const" );
+const date_time_t * const_time_2 = date_time_modes_t::factory( current_date_time_t().type() );
+}}}
+
+`const_time_1` was created by string name.
+`const_time_1` was created by type.
+
+= Comparing of two elements =
+
+Use pointer compare:
+
+{{{
+const_time_1 == const_time_2
+}}}
+
+= Comparing with another constant =
+
+Make new pointer and compare:
+
+{{{
+const_time_2->type() != current_date_time_t().type()
+const_time_2 == date_time_modes_t::factory( const_date_time_t().type() )
+}}}
+
+= Name of Type = 
+
+Use `type()` method:
+
+{{{
+const_time_1->type()
+current_date_time_t().type()
+}}}
+
+= Make list of constants by delimiter = 
+
+Use function of modes-class:
+
+{{{
+date_time_modes_t::get_list( " | " )
+}}}
+
+= Control of incorrect run-time data = 
+
+For example, unpredictable entering of user:
+
+{{{
+std::string dtm;
+std::cin >> dtm;
+
+if ( date_time_modes_t::exist_type( dtm ) )
+	const_time = date_time_modes_t::factory( dtm );
+}}}
+
+We use function `exist_type` to do decision.
+
+= Extending methods with virtual control = 
+
+Example:
+
+{{{
+// Mode of date_time transaction.
+class date_time_t
+{
+	public:
+...
+		//! Create controller by type.
+		virtual a_serial_controller_t *
+		get_new_instance( 
+			//! Name of controller.
+			const std::string & name, 
+			//! Configuration.
+			const serial_cfg_t & send_cfg ) const = 0;
+};
+
+//! Use current time at start of transaction.
+class current_date_time_t : public date_time_t
+{
+	public:
+...
+		virtual a_serial_controller_t *
+		get_new_instance( 
+			const std::string & name, 
+			const serial_cfg_t & send_cfg ) const;
+};
+}}}
+
+We use root class `date_time_t` to config user time control of transactions. At some moment we wanted to extend by function. To do this we created virtual function in the root class. Compiler controlled creating of functions in all constants. And we can use this function in all constants and in class `date_time_modes_t`.
