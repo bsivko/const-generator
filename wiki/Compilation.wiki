@@ -1,0 +1,9 @@
+#summary Compilation of project.
+
+= Requirements =
+
+Project can be compiled with [http://rubyforge.org/projects/mxx-ru MXX_RU].
+
+As a compiler on Windows you can use Microsoft Visual C++ 9.0 or newer.
+
+Constant Generator is designed to have fairly minimal requirements to build and use for generating and compiling.
