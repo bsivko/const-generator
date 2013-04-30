@@ -27,10 +27,10 @@
 
 namespace const_generator {
 
-//! Генерирует файлы типов на основании cfg.
+//! Use cfg info for generate files (and generate).
 void
 generate( 
-	//! Информация для генерации.
+	//! Info for generation.
 	const cfg_t & cfg );
 
 } /* namespace const_generator */
