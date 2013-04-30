@@ -35,7 +35,7 @@ namespace const_generator {
 /*!
 	\return vector of values in order of parsing.
 
-	\note delimiters should be deleted.
+	\note delimiters will be deleted.
 */
 std::vector<std::string>
 split_by_delimiter( 

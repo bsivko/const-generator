@@ -30,42 +30,42 @@
 
 namespace const_generator {
 
-//! Расширение файла для интерфейса.
+//! Ext of file for interface.
 const std::string gc_hpp_ext = "hpp";
-//! Расширение файла для реализации.
+//! Ext of file for impl.
 const std::string gc_cpp_ext = "cpp";
 
-//! Создать имя класса с учетом всех префиксов и постфиксов.
+//! Create name of class with using prefixes and postfixes.
 inline std::string
 create_class_name( const std::string & name )
 {
 	return name + "_t";
 }
 
-//! Создать имя modes-класса.
+//! Create overall class name.
 inline std::string
 create_modes_class_name( const std::string & root_name )
 {
 	return create_class_name( root_name + "_" + "modes" );;
 }
 
-//! Собрать строку из вектора по разделителям.
+//! Make string from vector by delimiters.
 /*!
-	\note сборка идет вида 
+	\note result by next view: 
 		prefix + value[0] + delimiter + 
 		prefix + value[1] + delimiter + 
 		...
 		prefix + value[n-1]
 
-	\return строка в заданном формате.
+	\return string in described format.
 */
 std::string
 collect_by_delimiters( 
-	//! Элементы вставки.
+	//! Elements to insert.
 	const std::vector<std::string> & values, 
-	//! Префикс перед каждым элементом.
+	//! Prefix before every element.
 	const std::string & prefix, 
-	//! Разделитель между элементами.
+	//! Delimiter between elements.
 	const std::string & delimiter )
 {
 	std::string result;
@@ -80,15 +80,15 @@ collect_by_delimiters(
 	return result;
 }
 
-//! Открывает файл и проверяет, что с ним все в порядке при открытии.
+//! Open file and check that it ok.
 /*!
-	\thow std::exception в случае ошибок.
+	\throw std::exception if open fail.
 */
 void
 open_and_check( 
-	//! Объект на открытие.
+	//! File to open.
 	std::ofstream & file, 
-	//! Имя файла.
+	//! Name of file.
 	const std::string & name )
 {
 	file.open( name.c_str(), std::ios::out );
@@ -100,11 +100,12 @@ open_and_check(
 	}
 }
 
+//! Make namespaces of head of file.
 void
 make_head_namespaces( 
-	//! Поток-приемник формирования.
+	//! Stream-receiver.
 	std::ostream & o, 
-	//! Когфигурация для сборки.
+	//! Cfg to make.
 	const cfg_t & cfg )
 {
 	o << 
@@ -112,11 +113,12 @@ make_head_namespaces(
 		" {\n\n" << std::endl;
 }
 
+//! Make namespaces of foot of the file.
 void
 make_foot_namespaces( 
-	//! Поток-приемник формирования.
+	//! Stream-receiver.
 	std::ostream & o, 
-	//! Когфигурация для сборки.
+	//! Cfg to make.
 	const cfg_t & cfg )
 {
 	cfg_t::namespaces_t namespaces;
@@ -129,17 +131,17 @@ make_foot_namespaces(
 		" */\n\n" << std::endl;
 }
 
-//! Получить hpp-класс как стринг.
+//! Get hpp-class as string.
 /*!
-	\return строка для hpp-описания типа.
+	\return string for hpp-description of type.
 */
 std::string
 make_hpp_classtype_as_string( 
-	//! Имя класса, из которого получаем.
+	//! Name of class.
 	const std::string & name,
-	//! Имя базового типа.
+	//! Name of base type.
 	const std::string & root_name,
-	//! Когфигурация для сборки.
+	//! Cfg of creating.
 	const cfg_t & cfg )
 {
 	std::ostringstream result;
@@ -151,7 +153,7 @@ make_hpp_classtype_as_string(
 		create_class_name(name + root_postfix);
 
 	result << 
-		"//! Описание типа.\n"
+		"//! Description of type.\n"
 		"class " << class_name << " : public " << create_class_name(root_name) << "\n"
 		"{\n" << 
 		"\tpublic:\n" <<
@@ -165,12 +167,12 @@ make_hpp_classtype_as_string(
 	return result.str();
 }
 
-//! Создать объединящий функциональный класс.
+//! Create overall class.
 std::string
 make_hpp_modes_type( 
-	//! Имя базового типа.
+	//! Name of base class.
 	const std::string & root_name,
-	//! Когфигурация для сборки.
+	//! Cfg of making.
 	const cfg_t & cfg )
 {
 
@@ -179,7 +181,7 @@ make_hpp_modes_type(
 	const std::string modes_name = create_modes_class_name( root_name );
 
 	result << 
-		"//! Тип множества всех возможных типов.\n"
+		"//! Type of variety all possible types.\n"
 		"class " << modes_name << " {\n"
 		"\tprotected:\n"
 		"\t\t//! Static class.\n"
@@ -187,37 +189,37 @@ make_hpp_modes_type(
 		"\tpublic:\n"
 		"\t\tvirtual\n"
 		"\t\t~" << modes_name << "();\n\n"
-		"\t\t//! Сформировать список " << root_name << " через разделитель.\n"
+		"\t\t//! Form list " << root_name << " by delimiter.\n"
 		"\t\tstatic std::string\n"
 		"\t\tget_list( const std::string & delimiter = \", \" );\n\n"
-		"\t\t//! Проверка на присутствие типа по строке.\n"
+		"\t\t//! Check of presenting type by string.\n"
 		"\t\tstatic bool\n"
 		"\t\texist_type( const std::string & name );\n\n"
-		"\t\t//! Фабрика для " << root_name << " через именованную строку.\n"
+		"\t\t//! Factory of creating " << root_name << " by name-string.\n"
 		"\t\tstatic const " << create_class_name( root_name ) << " *\n" 
 		"\t\tfactory( const std::string & name );\n\n"
 		"\tprotected:\n\n"
-		"\t\t//! Сформировать множество пар всех возможных типов.\n" 
+		"\t\t//! Form variety of pairs all possible types.\n" 
 		"\t\tstatic void\n"
 		"\t\tinit();\n\n"
-		"\t\t//! Произвести очистку типов.\n"
+		"\t\t//! Make clearing of types.\n"
 		"\t\tstatic void\n"
 		"\t\tdeinit();\n\n"
 		"\tprivate:\n"
 		"\t\ttypedef std::map <std::string, " << create_class_name( root_name ) << " *> container_t;\n\n"
-		"\t\t//! Множество связок имя типа - экземпляр, описывающий тип.\n"
+		"\t\t//! Variety of links 'name type - description instance'.\n"
 		"\t\tstatic container_t m_container;\n"
 		"};\n\n";
 
 	return result.str();
 }
 
-//! Сформировать hpp в поток-приемник.
+//! Form hpp in stream-receiver.
 void
 make_hpp_file( 
-	//! Поток-приемник формирования.
+	//! Stream-receiver.
 	std::ostream & o, 
-	//! Конфигурация сборки.
+	//! Cfg of make.
 	const cfg_t & cfg )
 {
 	{
@@ -232,10 +234,12 @@ make_hpp_file(
 		o << header_def << std::endl;
 	}
 
-	o << "// При добавлении нового типа " << cfg.m_root_class_name << ":\n"
-		"// 1. Добавить класс-наследник от " << cfg.m_root_class_name << "_t.\n"
-		"//    В нем прописать type() с соответствующим именем.\n"
-		"// 2. Добавить в функцию init() вставку в контейнер по образцу.\n" <<
+	o << "// To add new type " << cfg.m_root_class_name << ":\n"
+		"// 1. Add sub-class from " << cfg.m_root_class_name << "_t.\n"
+		"//    Create virtual method type() and all control methods (if need).\n"
+		"// 2. Add in function " << 
+			make_hpp_modes_type( cfg.m_root_class_name, cfg ) << 
+			"::init() inserting to container by sample.\n" <<
 		std::endl;
 
 	o << 
@@ -245,11 +249,11 @@ make_hpp_file(
 	make_head_namespaces( o, cfg );
 
 	o << 
-		"//! Базовый тип для констант.\n" 
+		"//! Base type of constants.\n" 
 		"class " << cfg.m_root_class_name << "_t\n"
 		"{\n"
 		"\tpublic:\n"
-		"\t\t//! Стринговое представление типа.\n"
+		"\t\t//! String representation of type.\n"
 		"\t\tvirtual std::string\n"
 		"\t\ttype() const = 0;\n"
 		"\t\tvirtual\n"
@@ -269,21 +273,24 @@ make_hpp_file(
 	o << "#endif" << std::endl;
 }
 
-//! Сформировать cpp в поток-приемник.
+//! Form cpp in stream-receiver.
 void
 make_cpp_file( 
-	//! Поток-приемник формирования.
+	//! Stream-receiver.
 	std::ostream & o, 
-	//! Конфигурация сборки.
+	//! Cfg to make.
 	const cfg_t & cfg )
 {
-	const std::string modes_name = create_modes_class_name( cfg.m_root_class_name );
+	const std::string modes_name = 
+		create_modes_class_name( cfg.m_root_class_name );
 
-	const std::string activator_name = cfg.m_root_class_name + "_activator";
-	const std::string activator_class_name = create_modes_class_name( activator_name );
+	const std::string activator_name = 
+		cfg.m_root_class_name + "_activator";
+	const std::string activator_class_name = 
+		create_modes_class_name( activator_name );
 
 	{
-		std::string include_def = 
+		const std::string include_def = 
 			"#include <" + collect_by_delimiters( cfg.m_namespaces, "", "/" ) + 
 			"/h/" + cfg.m_root_class_name + "." + gc_hpp_ext + ">\n" + 
 			"#include <stdexcept>\n\n";
@@ -302,8 +309,8 @@ make_cpp_file(
 		modes_name << "::container_t " << 
 		modes_name << "::m_container;\n\n";
 
-	o << "//! Класс-объект для автоматического создания "
-		"и уничтожения множеств типов.\n"
+	o << "//! Instance for automatic creating "
+		"and deleting variety of types.\n"
 		"class " << activator_class_name << " : public " << modes_name << "\n"
 		"{\n"
 		"} " << activator_name << ";\n\n";

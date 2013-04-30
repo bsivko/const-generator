@@ -29,10 +29,10 @@
 
 namespace const_generator {
 
-//! Configuration of gereration.
+//! Generation configuration.
 struct cfg_t
 {
-	//! Name of root class.
+	//! Name of the root class.
 	std::string m_root_class_name;
 
 	typedef std::vector<std::string> types_t;
@@ -40,7 +40,7 @@ struct cfg_t
 	types_t m_types;
 
 	typedef std::vector<std::string> namespaces_t;
-	//! Namespace of user.
+	//! User namespace.
 	namespaces_t m_namespaces;
 
 	//! Include in name root type or not. 
@@ -51,7 +51,7 @@ struct cfg_t
 
 	//! Check this structure - correct or not.
 	/*!
-		\throw std::exception if is not checks.
+		\throw std::exception if incorrect.
 
 		\note automatic do normalize()
 	*/

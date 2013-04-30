@@ -42,7 +42,7 @@ create_class_name( const std::string & name )
 	return name + "_t";
 }
 
-//! Create name of overall class.
+//! Create overall class name.
 inline std::string
 create_modes_class_name( const std::string & root_name )
 {
@@ -82,7 +82,7 @@ collect_by_delimiters(
 
 //! Open file and check that it ok.
 /*!
-	\thow std::exception if open fail.
+	\throw std::exception if open fail.
 */
 void
 open_and_check( 
@@ -113,7 +113,7 @@ make_head_namespaces(
 		" {\n\n" << std::endl;
 }
 
-//! Make namespaces of foot of file.
+//! Make namespaces of foot of the file.
 void
 make_foot_namespaces( 
 	//! Stream-receiver.
