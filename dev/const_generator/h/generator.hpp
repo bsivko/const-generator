@@ -30,7 +30,7 @@ namespace const_generator {
 //! Use cfg info for generate files (and generate).
 void
 generate( 
-	//! Информация для генерации.
+	//! Info for generation.
 	const cfg_t & cfg );
 
 } /* namespace const_generator */

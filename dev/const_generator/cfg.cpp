@@ -40,7 +40,7 @@ void
 check_type( 
 	//! Check this value.
 	const std::string & value, 
-	//! Description of error.
+	//! Error description.
 	const std::string & desc )
 {
 	if ( value.empty() )
@@ -114,7 +114,7 @@ cfg_t::check()
 	for( unsigned int i = 0; i < m_types.size(); ++i )
 		check_type( m_types[i], m_types[i] );
 
-	// Check to the same elements.
+	// Check same elements.
 	for( unsigned int i = 0; i < m_types.size()-1; ++i )
 	{
 		if ( m_types[i] == m_types[i+1] )
