@@ -6,7 +6,7 @@ Use command-line to create base constants files.
 
 To use without compilation you can get binary files in [http://code.google.com/p/const-generator/source/browse/#svn%2Ftags%2Fbin tag-bin] directory.
 
-Generator creates only base files by user params. Next extending should be do by hand.
+Generator creates only base files by user params. Next extending should be done by hand.
 
 To view help of command line type:
 
@@ -27,7 +27,7 @@ As a result, "Const Generator" should create two files:
 "date_time.hpp"
 "date_time.cpp"
 
-Internal code will be placed in namespace `generator::main`.
+The internal code will be placed in namespace `generator::main`.
 
 Base type of class is `date_time_t`, and we'll find three child-classes: 
 `current_date_time_t`, `const_date_time_t`, `all_current_date_time_t`.
