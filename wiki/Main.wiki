@@ -1,6 +1,6 @@
 = Introduction =
 
-Const Generator allows create classes to support constant variables.
+Const Generator allows to create classes to support constant variables.
 
 It's a specific format like enums.
 
@@ -12,14 +12,14 @@ This format are using when we involve constants and we want to extend functional
 
 If we use simple enum list we can't create a function which can process all of them.
 
-For example, if we want to make list of variables to print. Or find constant with some run-time value.
+For example, if we want to make list of variables to print. Or to find constant with some run-time value.
 
 == Extend constants by additional data ==
 
-Enum-list is simple and can't extend data, which are associated with constant. In this case we should create addition data structures and create functions to work with them. Such variant is spontaneous and isn't systematic. Organization of this process like "Const Generator" should do this more easy and reliable.
+Enum-list is simple and can't extend data, which are associated with constant. In this case we should create some addition data structures and create functions to work with them. Such variant is spontaneous and isn't systematic. The organization of this process like "Const Generator" should do this more easy and reliable.
 
 == Easy to extend ==
 
 Extending should be easy, fast and reliable.
 
-Extending need minimum actions of user to create new constants and allows control extending of all data and functions.
+Extending needs minimum actions of user to create new constants and allows to control extending of all data and functions.
