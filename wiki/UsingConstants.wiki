@@ -2,9 +2,9 @@
 
 = Element of Type =
 
-All constant elements are const pointers.
+All of constant elements are const pointers.
 
-Elements can be created by several ways:
+The elements can be created by several ways:
 
 {{{
 const date_time_t * const_time_1 = date_time_modes_t::factory( "const" );
@@ -16,7 +16,7 @@ const date_time_t * const_time_2 = date_time_modes_t::factory( current_date_time
 
 = Comparing of two elements =
 
-Use pointer compare:
+Use a pointer comparison:
 
 {{{
 const_time_1 == const_time_2
@@ -24,7 +24,7 @@ const_time_1 == const_time_2
 
 = Comparing with another constant =
 
-Make new pointer and compare:
+Make a new pointer and compare:
 
 {{{
 const_time_2->type() != current_date_time_t().type()
@@ -42,7 +42,7 @@ current_date_time_t().type()
 
 = Make list of constants by delimiter = 
 
-Use function of modes-class:
+Use a function of modes-class:
 
 {{{
 date_time_modes_t::get_list( " | " )
@@ -50,7 +50,7 @@ date_time_modes_t::get_list( " | " )
 
 = Control of incorrect run-time data = 
 
-For example, unpredictable entering of user:
+For example, an unpredictable entering of user:
 
 {{{
 std::string dtm;
@@ -60,7 +60,7 @@ if ( date_time_modes_t::exist_type( dtm ) )
 	const_time = date_time_modes_t::factory( dtm );
 }}}
 
-We use function `exist_type` to do decision.
+We use function `exist_type` to do our decision.
 
 = Extending methods with virtual control = 
 
@@ -93,10 +93,10 @@ class current_date_time_t : public date_time_t
 };
 }}}
 
-We use root class `date_time_t` to config an user time control of transactions. At some moment we wanted to extend by function. To do this we created virtual function in the root class. The compiler controls the function creating in all constants. And we can use this function in all constants and in class `date_time_modes_t`.
+We use a root class `date_time_t` to config an user time control of transactions. At some moment we want to extend with function. To do this we create virtual function in the root class. The compiler controls the function creating in all of constants. And we can use the function in all of constants and in class `date_time_modes_t`.
 
 = Extending new constants =
 
 We should do two actions:
- # Create a new sub-class of root-class. And create all virtual methods.
+ # Create a new sub-class of root-class. And create all of virtual methods.
  # Add in function `init()` inserting to container by sample.
